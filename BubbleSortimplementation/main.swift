@@ -11,7 +11,7 @@ func waitForUserInput() {
     print("")
     print("Press return to continue...")
     // Waits for input from user, then discards it
-    _ = readLine()
+//     _ = readLine()
 }
 
 // Create an empty list (array)
@@ -39,6 +39,11 @@ dataSet.append(3)
 print("Unsorted:")
 print(dataSet)
 waitForUserInput()
+
+// Keep track of the start time (epoch)
+// When this line of code runs, startTime contains the number of seconds since January 1, 1970
+let startTime = Date().timeIntervalSince1970
+print("Starting sort...", terminator: "")
 
 // Keep track of the number of integers in the list that may not be in the correct position
 var numbersUnsorted = dataSet.count
@@ -84,3 +89,10 @@ for i in 0..<dataSet.count {
     
 }
 
+// Get end time (seconds since epoch)
+print("ended.")
+let endTime = Date().timeIntervalSince1970
+
+// Get the elapsed time
+let elapsedTime = endTime - startTime
+print("Sort took \(elapsedTime) seconds.")
