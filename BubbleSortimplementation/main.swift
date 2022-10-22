@@ -48,51 +48,63 @@ print("Starting sort...", terminator: "")
 // Keep track of the number of integers in the list that may not be in the correct position
 var numbersUnsorted = dataSet.count
 
-// Loop through the entire array "n" times (however many times there are elements in the array)
-for i in 0..<dataSet.count {
+// Store the total time used for the trials
+var totalTime = 0.0
+
+// Allow for consecutive trials to occur
+var trials = Int.random(in: 2...10)
+for _ in 1...trials {
     
-    // Keep track of whether a pair of numbers was swapped
-    var swapped = false
-    
-    // One pass through the array to float the highest number to the end
-    for j in 0..<numbersUnsorted - 1 {
+    // Loop through the entire array "n" times (however many times there are elements in the array)
+    for i in 0..<dataSet.count {
         
-        // Compare left value to right value
-        print("Comparison \(j + 1)...", terminator: "")
-        if dataSet[j] > dataSet[j + 1] {
+        // Keep track of whether a pair of numbers was swapped
+        var swapped = false
+        
+        // One pass through the array to float the highest number to the end
+        for j in 0..<numbersUnsorted - 1 {
             
-            // Swap values (when left value is more than right value)
-            let temporaryValue = dataSet[j] // Set aside the left value
-            dataSet[j] = dataSet[j + 1]     // Replace left with right
-            dataSet[j + 1] = temporaryValue // Replace right with the temporary value
-            print(" values were swapped.", terminator: "")
-            
-            // Note that a swap occured
-            swapped = true
-            
+            // Compare left value to right value
+            print("Comparison \(j + 1)...", terminator: "")
+            if dataSet[j] > dataSet[j + 1] {
+                
+                // Swap values (when left value is more than right value)
+                let temporaryValue = dataSet[j] // Set aside the left value
+                dataSet[j] = dataSet[j + 1]     // Replace left with right
+                dataSet[j + 1] = temporaryValue // Replace right with the temporary value
+                print(" values were swapped.", terminator: "")
+                
+                // Note that a swap occured
+                swapped = true
+                
+            }
+            print("")
         }
-        print("")
+        
+        // Print the array after the pass
+        print("Array after pass \(i + 1):")
+        print(dataSet)
+        waitForUserInput()
+        
+        // When no swaps occured, stop the outer loop
+        if swapped == false {
+            break
+        }
+        
+        // After each pass, at least one more number can be determined to be in the right position in the list
+        numbersUnsorted -= 1
+        
     }
     
-    // Print the array after the pass
-    print("Array after pass \(i + 1):")
-    print(dataSet)
-    waitForUserInput()
+    // Get end time (seconds since epoch)
+    print("ended.")
+    let endTime = Date().timeIntervalSince1970
+
+    // Get the elapsed time
+    let elapsedTime = endTime - startTime
+    print("Sort took \(elapsedTime) seconds.")
     
-    // When no swaps occured, stop the outer loop
-    if swapped == false {
-        break
-    }
-    
-    // After each pass, at least one more number can be determined to be in the right position in the list
-    numbersUnsorted -= 1
+    totalTime += elapsedTime
     
 }
-
-// Get end time (seconds since epoch)
-print("ended.")
-let endTime = Date().timeIntervalSince1970
-
-// Get the elapsed time
-let elapsedTime = endTime - startTime
-print("Sort took \(elapsedTime) seconds.")
+print("Average time for all trials is \(totalTime/Double(trials)) seconds.")
