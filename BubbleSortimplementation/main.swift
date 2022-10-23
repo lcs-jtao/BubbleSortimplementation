@@ -14,20 +14,22 @@ func waitForUserInput() {
 //     _ = readLine()
 }
 
+// Create an empty list (array)
+var dataSet: [Int] = []
+
+// Populate the list
+for _ in 1...10 {
+    dataSet.append(Int.random(in: 1...100))
+}
+
 // Store the total time used for the trials
 var totalTime = 0.0
 
 // Allow for consecutive trials to occur
 var trials = Int.random(in: 2...10)
 for _ in 1...trials {
-
-    // Create an empty list (array)
-    var dataSet: [Int] = []
-
-    // Populate the list
-    for _ in 1...10 {
-        dataSet.append(Int.random(in: 1...100))
-    }
+    
+    var currentList = dataSet
 
     // Print the list
     print("Unsorted:")
@@ -40,10 +42,10 @@ for _ in 1...trials {
     print("Starting sort...", terminator: "")
 
     // Keep track of the number of integers in the list that may not be in the correct position
-    var numbersUnsorted = dataSet.count
+    var numbersUnsorted = currentList.count
     
     // Loop through the entire array "n" times (however many times there are elements in the array)
-    for i in 0..<dataSet.count {
+    for i in 0..<currentList.count {
         
         // Keep track of whether a pair of numbers was swapped
         var swapped = false
@@ -53,12 +55,12 @@ for _ in 1...trials {
             
             // Compare left value to right value
             print("Comparison \(j + 1)...", terminator: "")
-            if dataSet[j] > dataSet[j + 1] {
+            if currentList[j] > currentList[j + 1] {
                 
                 // Swap values (when left value is more than right value)
-                let temporaryValue = dataSet[j] // Set aside the left value
-                dataSet[j] = dataSet[j + 1]     // Replace left with right
-                dataSet[j + 1] = temporaryValue // Replace right with the temporary value
+                let temporaryValue = currentList[j] // Set aside the left value
+                currentList[j] = currentList[j + 1]     // Replace left with right
+                currentList[j + 1] = temporaryValue // Replace right with the temporary value
                 print(" values were swapped.", terminator: "")
                 
                 // Note that a swap occured
@@ -70,7 +72,7 @@ for _ in 1...trials {
         
         // Print the array after the pass
         print("Array after pass \(i + 1):")
-        print(dataSet)
+        print(currentList)
         waitForUserInput()
         
         // When no swaps occured, stop the outer loop
