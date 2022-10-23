@@ -33,7 +33,7 @@ for _ in 1...trials {
 
     // Print the list
     print("Unsorted:")
-    print(dataSet)
+    print(currentList)
     waitForUserInput()
 
     // Keep track of the start time (epoch)
