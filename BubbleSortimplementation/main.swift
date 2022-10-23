@@ -14,46 +14,33 @@ func waitForUserInput() {
 //     _ = readLine()
 }
 
-// Create an empty list (array)
-var dataSet: [Int] = []
-
-// Populate the list
-
-// Worst case scenario - reversely sorted
-dataSet.append(96)
-dataSet.append(94)
-dataSet.append(93)
-dataSet.append(89)
-dataSet.append(19)
-dataSet.append(17)
-dataSet.append(13)
-dataSet.append(10)
-dataSet.append(6)
-dataSet.append(3)
-
-// for _ in 1...10 {
-//     dataSet.append(Int.random(in: 1...100))
-// }
-
-// Print the list
-print("Unsorted:")
-print(dataSet)
-waitForUserInput()
-
-// Keep track of the start time (epoch)
-// When this line of code runs, startTime contains the number of seconds since January 1, 1970
-let startTime = Date().timeIntervalSince1970
-print("Starting sort...", terminator: "")
-
-// Keep track of the number of integers in the list that may not be in the correct position
-var numbersUnsorted = dataSet.count
-
 // Store the total time used for the trials
 var totalTime = 0.0
 
 // Allow for consecutive trials to occur
 var trials = Int.random(in: 2...10)
 for _ in 1...trials {
+
+    // Create an empty list (array)
+    var dataSet: [Int] = []
+
+    // Populate the list
+    for _ in 1...10 {
+        dataSet.append(Int.random(in: 1...100))
+    }
+
+    // Print the list
+    print("Unsorted:")
+    print(dataSet)
+    waitForUserInput()
+
+    // Keep track of the start time (epoch)
+    // When this line of code runs, startTime contains the number of seconds since January 1, 1970
+    let startTime = Date().timeIntervalSince1970
+    print("Starting sort...", terminator: "")
+
+    // Keep track of the number of integers in the list that may not be in the correct position
+    var numbersUnsorted = dataSet.count
     
     // Loop through the entire array "n" times (however many times there are elements in the array)
     for i in 0..<dataSet.count {
