@@ -40,9 +40,6 @@ for _ in 1...trials {
     // When this line of code runs, startTime contains the number of seconds since January 1, 1970
     let startTime = Date().timeIntervalSince1970
     print("Starting sort...", terminator: "")
-
-    // Keep track of the number of integers in the list that may not be in the correct position
-    var numbersUnsorted = currentList.count
     
     // Loop through the entire array "n" times (however many times there are elements in the array)
     for i in 0..<currentList.count {
@@ -51,7 +48,7 @@ for _ in 1...trials {
         var swapped = false
         
         // One pass through the array to float the highest number to the end
-        for j in 0..<numbersUnsorted - 1 {
+        for j in 0..<currentList.count - 1 - i {
             
             // Compare left value to right value
             print("Comparison \(j + 1)...", terminator: "")
@@ -79,9 +76,6 @@ for _ in 1...trials {
         if swapped == false {
             break
         }
-        
-        // After each pass, at least one more number can be determined to be in the right position in the list
-        numbersUnsorted -= 1
         
     }
     
